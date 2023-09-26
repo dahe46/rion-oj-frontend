@@ -1,30 +1,166 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view />
+  <div id="app">
+    <template v-if="route.path.startsWith('/user')">
+      <router-view />
+    </template>
+    <template v-else>
+      <BasicLayout />
+    </template>
+    <div class="square">
+      <ul class="my-ul">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+    <div class="circle">
+      <ul class="my-ul">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+  </div>
 </template>
 
+<script setup lang="ts">
+import BasicLayout from "@/layouts/BasicLayout.vue";
+import { onMounted } from "vue";
+import { useRoute } from "vue-router";
+
+const route = useRoute();
+const doInit = async () => {
+  console.log("App Init");
+};
+
+onMounted(() => {
+  doInit();
+});
+</script>
+
 <style>
+/*body {*/
+/*  background: url("../src/assets/oj-backend2.png");*/
+/*}*/
+.arco-table {
+  z-index: 1;
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  margin: 0;
+  padding: 0;
+  /* 100%窗口高度 */
+  min-height: 100vh;
+  /* 渐变背景 */
+  background: linear-gradient(200deg, #e3c5eb, #a9c1ed);
+  /* 溢出隐藏 */
+  overflow: hidden;
 }
 
-nav {
-  padding: 30px;
+.my-ul li {
+  position: absolute;
+  border: 1px solid #fff;
+  background-color: #fff;
+  width: 30px;
+  height: 30px;
+  list-style: none;
+  opacity: 0;
 }
 
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
+.square li {
+  top: 40vh;
+  left: 60vw;
+  /* 执行动画：动画名 时长 线性的 无限次播放 */
+  animation: square 10s linear infinite;
 }
 
-nav a.router-link-exact-active {
-  color: #42b983;
+.square li:nth-child(2) {
+  top: 80vh;
+  left: 10vw;
+  /* 设置动画延迟时间 */
+  animation-delay: 2s;
+}
+
+.square li:nth-child(3) {
+  top: 80vh;
+  left: 85vw;
+  /* 设置动画延迟时间 */
+  animation-delay: 4s;
+}
+
+.square li:nth-child(4) {
+  top: 10vh;
+  left: 70vw;
+  /* 设置动画延迟时间 */
+  animation-delay: 6s;
+}
+
+.square li:nth-child(5) {
+  top: 10vh;
+  left: 10vw;
+  /* 设置动画延迟时间 */
+  animation-delay: 8s;
+}
+
+.circle li {
+  bottom: 0;
+  left: 15vw;
+  /* 执行动画 */
+  animation: circle 10s linear infinite;
+}
+
+.circle li:nth-child(2) {
+  left: 35vw;
+  /* 设置动画延迟时间 */
+  animation-delay: 2s;
+}
+
+.circle li:nth-child(3) {
+  left: 55vw;
+  /* 设置动画延迟时间 */
+  animation-delay: 6s;
+}
+
+.circle li:nth-child(4) {
+  left: 75vw;
+  /* 设置动画延迟时间 */
+  animation-delay: 4s;
+}
+
+.circle li:nth-child(5) {
+  left: 90vw;
+  /* 设置动画延迟时间 */
+  animation-delay: 8s;
+}
+
+/* 定义动画 */
+@keyframes square {
+  0% {
+    transform: scale(0) rotateY(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(5) rotateY(1000deg);
+    opacity: 0;
+  }
+}
+
+@keyframes circle {
+  0% {
+    transform: scale(0) rotateY(0deg);
+    opacity: 1;
+    bottom: 0;
+    border-radius: 0;
+  }
+  100% {
+    transform: scale(5) rotateY(1000deg);
+    opacity: 0;
+    bottom: 90vh;
+    border-radius: 50%;
+  }
 }
 </style>
