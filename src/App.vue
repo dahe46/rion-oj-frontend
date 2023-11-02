@@ -42,7 +42,7 @@ onMounted(() => {
 });
 </script>
 
-<style>
+<style scoped>
 /*body {*/
 /*  background: url("../src/assets/oj-backend2.png");*/
 /*}*/

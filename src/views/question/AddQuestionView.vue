@@ -231,5 +231,8 @@ const handleDelete = (index: number) => {
 
 <style scoped>
 #addQuestionView {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
