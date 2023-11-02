@@ -77,6 +77,7 @@ import { UserControllerService, UserLoginRequest } from "../../../generated";
 import message from "@arco-design/web-vue/es/message";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
+import { setToken } from "@/common/token";
 
 const store = useStore();
 const router = useRouter();
@@ -90,9 +91,9 @@ const handleSubmit = async () => {
   console.log(res);
   if (res.code === 0) {
     await store.dispatch("user/getLoginUser");
+    setToken(res.data.token);
     await router.push({
       path: "/",
-      replace: true,
     });
     message.success("登录成功");
   } else {

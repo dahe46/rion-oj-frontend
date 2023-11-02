@@ -71,14 +71,13 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, watchEffect, withDefaults, defineProps } from "vue";
+import { onMounted, ref, withDefaults, defineProps } from "vue";
 import message from "@arco-design/web-vue/es/message";
 import CodeEditor from "@/components/CodeEditor.vue";
 import MdViewer from "@/components/MdViewer.vue";
 import {
   QuestionControllerService,
   QuestionSubmitAddRequest,
-  QuestionSubmitControllerService,
   QuestionVO,
 } from "../../../generated";
 
@@ -115,7 +114,7 @@ const doSubmit = async () => {
   if (!question.value?.id) {
     return;
   }
-  const res = await QuestionSubmitControllerService.doSubmitUsingPost({
+  const res = await QuestionControllerService.doSubmitUsingPost({
     ...form.value,
     questionId: question.value.id,
   });
@@ -140,6 +139,7 @@ const changeCode = (value: string) => {
 
 <style>
 #viewQuestionView {
+  width: 100%;
   max-width: 1400px;
   margin: 0 auto;
 }

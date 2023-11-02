@@ -13,7 +13,7 @@ export default {
   actions: {
     async getLoginUser({ commit, state }, payload) {
       const res = await UserControllerService.getLoginUserUsingGet();
-      if (res.code === 0) {
+      if (res.code === 0 && res.data !== null) {
         commit("updateUser", res.data);
       } else {
         commit("updateUser", {
