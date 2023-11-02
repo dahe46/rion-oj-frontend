@@ -1,26 +1,32 @@
 <template>
   <div class="basicLayout">
-    <a-layout style="min-height: 100vh">
+    <a-layout>
       <a-layout-header class="header">
         <GlobalHeader />
       </a-layout-header>
       <a-layout-content class="content">
-        <router-view />
+        <a-row justify="center">
+          <router-view />
+        </a-row>
       </a-layout-content>
-      <a-layout-footer class="footer">Rion</a-layout-footer>
+      <a-layout-footer class="footer"></a-layout-footer>
     </a-layout>
   </div>
 </template>
 
 <style scoped>
 .header {
+  z-index: 1;
+  background: linear-gradient(200deg, #e3c5eb, #a9c1ed);
 }
 
 .content {
-  padding: 20px;
+  padding: 10px;
+  z-index: 1;
 }
 
 .footer {
+  z-index: 1;
   position: sticky;
   bottom: 0;
   left: 0;

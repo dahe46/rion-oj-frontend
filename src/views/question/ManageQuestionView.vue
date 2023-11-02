@@ -1,36 +1,47 @@
 <template>
   <div id="manageQuestionView">
-    <a-table
-      :ref="tableRef"
-      :columns="columns"
-      :data="dataList"
-      :scroll="scroll"
-      :scrollbar="scrollbar"
-      :pagination="{
-        showTotal: true,
-        pageSize: searchParams.pageSize,
-        current: searchParams.current,
-        total: total,
-      }"
-      @page-change="onPageChange"
-    >
-      <template #tags="{ record }">
-        <a-space wrap>
-          <a-tag v-for="(tag, index) of record.tags" :key="index" color="green"
-            >{{ tag }}
-          </a-tag>
-        </a-space>
-      </template>
-      <template #createTime="{ record }">
-        {{ moment(record.createTime).format("YYYY-MM-DD HH:mm:ss") }}
-      </template>
-      <template #optional="{ record }">
-        <a-space>
-          <a-button type="primary" @click="doUpdate(record)"> 修改</a-button>
-          <a-button status="danger" @click="doDelete(record)">删除</a-button>
-        </a-space>
-      </template>
-    </a-table>
+    <a-row :gutter="[18, 18]">
+      <a-col :md="24" :xs="24">
+        <a-table
+          :ref="tableRef"
+          :columns="columns"
+          :data="dataList"
+          :scroll="scroll"
+          :scrollbar="scrollbar"
+          :pagination="{
+            showTotal: true,
+            pageSize: searchParams.pageSize,
+            current: searchParams.current,
+            total: total,
+          }"
+          @page-change="onPageChange"
+        >
+          <template #tags="{ record }">
+            <a-space wrap>
+              <a-tag
+                v-for="(tag, index) of record.tags"
+                :key="index"
+                color="green"
+                >{{ tag }}
+              </a-tag>
+            </a-space>
+          </template>
+          <template #createTime="{ record }">
+            {{ moment(record.createTime).format("YYYY-MM-DD HH:mm:ss") }}
+          </template>
+          <template #optional="{ record }">
+            <a-space>
+              <a-button type="primary" @click="doUpdate(record)">
+                修改</a-button
+              >
+              <a-button status="danger" @click="doDelete(record)"
+                >删除</a-button
+              >
+            </a-space>
+          </template>
+        </a-table>
+      </a-col>
+    </a-row>
   </div>
 </template>
 
@@ -86,12 +97,12 @@ watchEffect(() => {
   loadData();
 });
 
-/**
- * 页面加载时，请求数据
- */
-onMounted(() => {
-  loadData();
-});
+// /**
+//  * 页面加载时，请求数据
+//  */
+// onMounted(() => {
+//   loadData();
+// });
 
 // {id: "1", title: "A+ D", content: "新的题目内容", tags: "["二叉树"]", answer: "新的答案", submitNum: 0,…}
 
@@ -205,5 +216,8 @@ const doUpdate = (question: Question) => {
 
 <style scoped>
 #manageQuestionView {
+  width: 100%;
+  padding: 24px 24px 16px;
+  max-width: 1200px;
 }
 </style>
